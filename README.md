@@ -8,6 +8,8 @@ This is again the time of the year when it pays off for children between the age
 
 Living just a few sledge rides from the Polar Circle and the mountain of Korvatunturi where the real Santa Claus lives, we are in Finland used to having his elves or sometimes even Santa himself, checking our behavior through the windows. Typically we never see them in action, but instead only notice tracks in the snow or some fur hair from reindeers the morning after the visit. If we however use some clever technology, we will get alerted when Santa's crew is around!
 
+![](/images/Overview_compr.jpg)
+
 ## Solution
 
 A solution to this problem is to create a device which looks out through the window, checks if a person is looking into the house, and alerts only if it recognizes Santa. To avoid false Santa alarms, it will thus not alert for any other person, friend or foe.
@@ -16,7 +18,7 @@ One way is to use a camera connected to a microcontroller or computer and use a 
 
 A more elegant, and very affordable way is to use a Particle Photon 2 and the Person Sensor from Useful Sensors. At the time of writing both of them are priced below $10! Depending on how you want to get alerted, through a notification or some more mechanical way, you might need to spend a few more dollars at hardware.
 
-As I in a [previous project](https://www.particle.io/blog/how-to-unlock-a-door-with-your-face-using-particle/) had used the M2 SoM Evaluation Board and a B524 SoM, I decided to use the same setup, but there's nothing hindering you using e.g. Photon 2 instead.
+As I in a [previous project](https://www.particle.io/blog/how-to-unlock-a-door-with-your-face-using-particle/) had used the M2 SoM Evaluation Board and a B524 SoM, I decided to use the same setup, but there's nothing hindering you using e.g. Photon 2 instead. In this project physical bells are jingled with the help of the servo motor when Santa is detected.
 
 ## How does it work?
 
@@ -121,7 +123,7 @@ Only a few steps are needed to assemble the system:
 ## Software apps and online services
 
 - Visual Studio Code with the Particle Workbench extension installed
-- Optional if you want to get a Santa notification
+- Optional if you want to get an electronical Santa notification in addition to the mechanical
   - Particle’s Webhook Integration for sending notifications to your mobile
   - Twilio, Pushover, or similar services for sending SMS or notifications
 - The complete program can be found [here](/src/Person_sensor.cpp)
