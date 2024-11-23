@@ -71,14 +71,14 @@ For this project, you’ll need
 - A Particle account and basic understanding of the Particle platform's capabilities.
 - Particle-flavored, Arduino-style, C++ development.
 - No soldering is required for this PoC
-- Optional:
-  - [3D-printed case](/images/Linear_actuator_holder.stl) for the linear actuator
-- Optional: 3D-printed case for the Eval Board, and a [3D-printed enclosure](/images/Person%20Sensor%20Body_v1.1.stl) and [back plate](/images/Person%20Sensor%20Back%20Plate.stl) for the Person Sensor 
+- Optional but strongly recommended:
+  - [3D-printed case](/images/Linear_actuator_holder.stl) for the linear actuator, this can be fastened on any standard camera tripod or the [gooseneck](https://www.amazon.de/-/en/SUNNINGUP-Webcam-Holder-Gooseneck-Logitech/dp/B0CY1XCK5Y?crid=2WFW7HQM0HJPJ&dib=eyJ2IjoiMSJ9.kT3ZM6nWF0QKwosUQT_7Zq7jwWNwwZ8WvtMwOnsT8BZB1YZatMffhUGVJ9v7VmbB6F0LRjLQwBTMhXCrjN0eL_oO6GXo6AwQT3qCoP9wAKfZoJhlRgNDi21J_63oxpuw1q6M_synfozWbhuBRjnp_lzQP1CZA_pqM8mBNxlh91G__mYFKp-3W7TjKo_ue9WQ-rurY08xTsVJNB-5aWHc9owTR8U0kZnV634K6-KGCno.96RiRaGgM76K_7PEJZX35qy5HXdGSG0hmovSdrlnwe4&dib_tag=se&keywords=gooseneck+tripod&qid=1725531849&sprefix=gooseneck+tripod%2Caps%2C92&sr=8-10) I used
+  - [3D-printed enclosure](/images/Person%20Sensor%20Body_v1.1.stl) and [back plate](/images/Person%20Sensor%20Back%20Plate.stl) for the Person Sensor 
 
 
 # Assembly
 
-Only a few steps are needed to assemble the system (see the top image for a visual overview):
+Only a few steps are needed to assemble the system:
 - Attach the B524 to the Eval Board
 - Connect the cellular antenna to the Eval Board (the Bluetooth antenna can be left unconnected for this project).
 - Connect the Person Sensor to the Eval Board, ensuring that you connect it to the I2C Grove port, not the analog port!
@@ -110,14 +110,10 @@ Only a few steps are needed to assemble the system (see the top image for a visu
 
 
 
-### Optional: Test the servo
-
-You can optionally verify the servo connection using [this test program](/backup/Servo.cpp), which moves the servo horn between its two endpoints. The program is optimized for the specific servo used in this project, so verify your servo's specifications before running it.
-
 ## Software apps and online services
 
 - Visual Studio Code with the Particle Workbench extension installed
-- Optional
+- Optional if you want to get a Santa notification
   - Particle’s Webhook Integration for sending notifications to your mobile
   - Twilio, Pushover, or similar services for sending SMS or notifications
 - The complete program can be found [here](/src/Person_sensor.cpp)
@@ -224,30 +220,50 @@ Both during the calibration process and under normal use you can follow what the
 
 Apart from verification and troubleshooting purposes, you should also take a note of which face is having which ID. E.g. if your face were registered with ID 0, and your childrens with 1 respectively 2, you need to remember this for next step.
 
-### Set up the facial unlock configuration ###
+### Set up the Santa detection alarm ###
 
-If you want the servo to react - e.g. open a door - to specific faces, you need to change this code (around line 135):
-`(face-> id == 3 || face -> id == 0)` to include the face or faces you want to be able to unlock the door. In this case my own face is registered twice, once with glasses and once without.
+If you want the servo to react to specific faces, you need to change this code (around line 156):
+`(face-> id == 4)` to include the face or faces you want to be able to unlock the door. In this case Santa has id #4, and while other faces like the president of Finland and Mona Lisa are identified by the Person Sensor, we don't take any actions on them.
+
+Depending on the mechanical alarm device you've created, you might want to change how many times the servo is moving back and forth, in this case with the variable `jingles`, or the end positions and speed of the servo in the `santa`-function.
 
 ```
-        // opening the door if it's closed and enough time has passed, also publishing to Particle
-        unsigned long currentTime = millis();
-        if ( (currentTime - lastPublishTime >= publishInterval) && (face-> id == 3 || face -> id == 0) && door_open == false) {
-            Particle.publish("face_detected", String(face->id), PRIVATE);
-            open();
-            Serial.println("** OPENING **");
-            door_open = true;
-            lastPublishTime = currentTime;
-            lastOpenTime = currentTime;
-
+#ifdef santa
+        if (face-> id == 4)  {
+          int jingles = 6;
+          
+          for (int jingle = 0; jingle < jingles; jingle++)
+            santa();
         }
+#else
 ```
+
+
+
+```
+void santa()  {
+  int speed = 5;
+
+  for(servo_pos = 0; servo_pos < 175; servo_pos += speed)   // goes from 0 degrees to xxx degrees
+  {                                                     // in steps of 1 degree
+    myservo.write(servo_pos);                           // tell servo to go to position in variable 'pos'
+    delay(5);                                           // waits for the servo to reach the position
+  }
+
+  delay(200);
+
+  for(servo_pos = 175; servo_pos>=1; servo_pos -= speed)      // goes from xxx degrees to 0 degrees
+  {                                                     // in steps of 1 degree
+    myservo.write(servo_pos);                           // tell servo to go to position in variable 'pos'
+    delay(5);                                           // waits for the servo to reach the position
+  }
+}
+```
+
 
 ### Notification settings ###
 
 With the Pushover service you can send 10000 notifications/month for free. Especially while setting up and testing this concept, I could easily consume close to 100 notifications per day. From a quota point of view this was still not an issue, but I got tired of the constant pings on my mobile and smartwatch. Hence I decided to send a notification if at least 10 seconds have gone since previous notification.
-
-Furthermore, while you are testing the code, you can comment out the `Particle.puhlish...` function call.
 
 
 ## Security notes ##
