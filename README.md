@@ -72,7 +72,7 @@ For this project, you’ll need
 - Particle-flavored, Arduino-style, C++ development.
 - No soldering is required for this PoC
 - Optional:
-  - 3D-printed case for the linear actuator: 
+  - 3D-printed case for the [linear actuator: ](/images/Linear_actuator_holder.stl) 
 - Optional: 3D-printed case for the Eval Board, and a [3D-printed enclosure](https://thangs.com/designer/ZackFreedman/3d-model/Person%20Sensor%20Mount%20-%20Print-in-place%2C%20nothing%20but%20filament%21-836098) for the Person Sensor 
 
 
