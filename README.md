@@ -14,7 +14,7 @@ A solution to this problem is to create a device which looks out through the win
 
 One way is to use a camera connected to a microcontroller or computer and use a machine learning model trained to recognize Santa. The drawback is that you might need to spend up to $100 for a good enough camera and microcontroller and spend hours of building a ML model. 
 
-A more elegant, and very affordable way is to use a Particle Photon 2 and the Person Sensor from Useful Sensors. At the time of writing both of them are priced at $9! Depending on how you want to get alerted, through a notification or some more mechanical way, you might need to spend a few more dollars at hardware.
+A more elegant, and very affordable way is to use a Particle Photon 2 and the Person Sensor from Useful Sensors. At the time of writing both of them are priced below $10! Depending on how you want to get alerted, through a notification or some more mechanical way, you might need to spend a few more dollars at hardware.
 
 As I in a [previous project](https://www.particle.io/blog/how-to-unlock-a-door-with-your-face-using-particle/) had used the M2 SoM Evaluation Board and a B524 SoM, I decided to use the same setup, but there's nothing hindering you using e.g. Photon 2 instead.
 
@@ -45,7 +45,7 @@ Below a GIF-video demonstrating the behavior, here's a short [video clip](https:
 
 ![](/images/B524_cropped.jpg)
 
-- [Person Sensor by Useful Sensors](https://www.sparkfun.com/products/21231), priced at ~$10 USD!
+- [Person Sensor by Useful Sensors](https://www.sparkfun.com/products/21231)
 
 ![](/images/Person_Sensor_cropped.jpg)
 
@@ -272,19 +272,10 @@ According to Useful Sensors you shouldn’t rely on the facial identification re
 
 You of course also needs to consider physical security of the device, and weather-proofing everything as per the location.
 
-## Real-Life Solution Demonstration ##
-
-In this video you can see how the blue "lock" on the left hand is ensuring no-one can steal my marathon medals. The hinge only unlocks when the sensor sees my face, and in this case automatically locks itself after 10 seconds.
-
-![](/images/Facial_recognition_door_unlock.gif)
-
-At the same time a notification is sent to my phone, informing who is opening the cabinet. This is in this use case useful as I can see if someone, apart from me, is in front of the sensor and perhaps trying to break in.
-
-
-![](/images/IMG_4441_cropped.jpg)
-
 
 
 # CONCLUSION #
+
+
 
 This PoC and tutorial demonstrated how you with fairly simple devices can build a facial recognition and identification doorbell/notification device, and in addition how you can utilize it for e.g. unlocking purposes. This was also the first time I used a Particle device together with their IoT-platform, and although I didn't understand everything right away, I'm surprised how logical everything is, once I got over the initial hurdle!
