@@ -1,6 +1,6 @@
 # Santa Claus Detector
 
-This is again the time of the year when it pays off for children between the age of 0-99 to be nice to relatives and friends. You never know who's watching through the window!
+This is again the time of the year when it pays off for children between the age of 0-99 to be nice to everyone. You never know who's watching through the window!
 
 
 
@@ -218,7 +218,7 @@ void button_clicked(system_event_t event, int param)
 
 Both during the calibration process and under normal use you can follow what the program is doing via the terminal window. To open this, open the Command Palette (Ctrl+Shift+P) and search for `Particle: Serial Monitor`. If you want to redo the calibration, just recycle power to the device and start the calibration again.
 
-Apart from verification and troubleshooting purposes, you should also take a note of which face is having which ID. E.g. if your face were registered with ID 0, and your childrens with 1 respectively 2, you need to remember this for next step.
+Apart from verification and troubleshooting purposes, you should also take a note of which face is having which ID. E.g. if your face were registered with ID 1, and Santa's with ID 4, you need to remember this for next step.
 
 ### Set up the Santa detection alarm ###
 
