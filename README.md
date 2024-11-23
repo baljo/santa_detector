@@ -2,6 +2,7 @@
 
 This is again the time of the year when it pays off for children between the age of 0-99 to be nice to everyone. You never know who's watching through the window!
 
+![](/images/Santa_detected_3_compr.png)
 
 
 ## Story
