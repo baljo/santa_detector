@@ -1,21 +1,22 @@
-# How to unlock a door with your face
+# Santa Claus Detector
 
-![](/images/IMG_4468_cropped.jpg)
+This is again the time of the year when it pays off for children between the age of 0-99 to be nice to relatives and friends. You never know who's watching through the window!
 
 
 
-## Problem statement
+## Story
 
-There are moments when you wish you had three arms. Imagine arriving home with bags of groceries in both hands, rain pouring down, and needing to find your keys to unlock the door—without letting your groceries get wet and dirty.
-
-There are similarly cases when you'd like something to happen when your face is identified. E.g. unlocking a medal cabinet only if you are in front of it, or starting a small fan when you are sitting at your desk.
+Living just a few sledge rides from the Polar Circle and the mountain of Korvatunturi where the real Santa Claus lives, we are in Finland used to having his elves or sometimes even Santa himself, checking our behavior through the windows. Typically we never see them in action, but instead only notice tracks in the snow or some fur hair from reindeers the morning after the visit. If we however use some clever technology, we will get alerted when Santa's crew is around!
 
 ## Solution
 
-A solution to the grocery shopping and medal cabinet use cases is to install a facial recognition doorbell and door unlocking mechanism. As an additional benefit, you can receive notifications when someone, like a family member, is recognized and opens the door, or if an unknown person appears at the door. With only minor modifications you can modify the concept to the desk fan use case, or anything else you can imagine.
+A solution to this problem is to create a device which looks out through the window, checks if a person is looking into the house, and alerts only if it recognizes Santa. To avoid false Santa alarms, it will thus not alert for any other person, friend or foe.
 
-To build this facial recognition proof of concept (PoC), an M2 SoM Evaluation Board, a B524 SoM, and the Person Sensor from Useful Sensors were used. Initially, the plan was to create a facial recognition doorbell that signals and sends notifications when someone is in front of the sensor. To take this further, I aimed to enable facial identification, meaning identifying **who** the person is, rather than just recognizing the presence of a person.
+One way is to use a camera connected to a microcontroller or computer and use a machine learning model trained to recognize Santa. The drawback is that you might need to spend up to $100 for a good enough camera and microcontroller and spend hours of building a ML model. 
 
+A more elegant, and very affordable way is to use a Particle Photon 2 and the Person Sensor from Useful Sensors. At the time of writing both of them are priced at $9! Depending on how you want to get alerted, through a notification or some more mechanical way, you might need to spend a few more dollars at hardware.
+
+As I in a [previous project](https://www.particle.io/blog/how-to-unlock-a-door-with-your-face-using-particle/) had used the M2 SoM Evaluation Board and a B524 SoM, I decided to use the same setup, but there's nothing hindering you using e.g. Photon 2 instead.
 
 ## How does it work?
 
@@ -24,11 +25,13 @@ From a user perspective, the process is straightforward:
 - The sensor continuously checks for faces in its view.
 - If a face is detected:
   - It checks whether the face matches one of the eight identities it has been calibrated to recognize.
-  - If a matching face is found, the Particle device verifies if that person is allowed to unlock the door and signals the servo accordingly.
-  - A mobile notification is sent through Pushover, identifying the person detected.
+  - If a matching face (= Santa) is found, the Particle device signals the servo accordingly.
+  - A mobile notification is sent through Pushover, alerting that Santa is around!
 
+Below a GIF-video demonstrating the behavior, here's a short [video clip](https://youtube.com/shorts/aByAacTvO_A) with sound.
 
-![](/images/close_up.gif)
+![](/images/Santa_Detector.gif)
+
 
 
 
@@ -68,6 +71,8 @@ For this project, you’ll need
 - A Particle account and basic understanding of the Particle platform's capabilities.
 - Particle-flavored, Arduino-style, C++ development.
 - No soldering is required for this PoC
+- Optional:
+  - 3D-printed case for the linear actuator: 
 - Optional: 3D-printed case for the Eval Board, and a [3D-printed enclosure](https://thangs.com/designer/ZackFreedman/3d-model/Person%20Sensor%20Mount%20-%20Print-in-place%2C%20nothing%20but%20filament%21-836098) for the Person Sensor 
 
 
