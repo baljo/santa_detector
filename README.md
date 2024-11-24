@@ -1,23 +1,25 @@
 # Santa Claus Detector
 
-This is again the time of the year when it pays off for children between the age of 0-99 to be nice to everyone. You never know who's watching through the window!
+It's that magical time of the year again when being nice (if you're between 0 and 99) really pays off! After all, you never know who might be watching through the window...
 
 ![](/images/Santa_detected_3_compr.png)
 
 
 ## Story
 
-Living just a few sledge rides from the Polar Circle and the mountain of Korvatunturi where the real Santa Claus lives, we are in Finland used to having his elves or sometimes even Santa himself, checking our behavior through the windows. Typically we never see them in action, but instead only notice tracks in the snow or some fur hair from reindeers the morning after the visit. If we however use some clever technology, we will get alerted when Santa's crew is around!
+Living just a few sleigh rides away from the Arctic Circle and the legendary Korvatunturi—Santa's real home—we Finns are no strangers to his elves (or even Santa himself) peeking through our windows to check on our behavior. Typically we never see them in action, but instead only notice tracks in the snow or some fur hair from reindeers the morning after the visit. 
+
+But what if we could outsmart them with some clever tech? Well, now we can get alerts when Santa’s crew is sneaking around!
 
 ![](/images/Overview_2_compr.jpg)
 
 ## Solution
 
-A solution to this problem is to create a device which looks out through the window, checks if a person is looking into the house, and alerts only if it recognizes Santa. To avoid false Santa alarms, it will thus not alert for any other person, friend or foe.
+The solution? Build a device that peers out the window, detects if someone’s looking in, and sends an alert only when it recognizes Santa. No false alarms here—your neighbors, friends, and even foes won't trigger it!
 
 One way is to use a camera connected to a microcontroller or computer and use a machine learning model trained to recognize Santa. The drawback is that you might need to spend up to $100 for a good enough camera and microcontroller and spend hours of building a ML model. 
 
-A more elegant, and very affordable way is to use a Particle Photon 2 and the Person Sensor from Useful Sensors. At the time of writing both of them are priced below $10! Depending on how you want to get alerted, through a notification or some more mechanical way, you might need to spend a few more dollars at hardware.
+An even more elegant—and budget-friendly—approach is to use a Particle Photon 2 and a Person Sensor from Useful Sensors. At the time of writing both of them are priced below $10! Depending on how you want to get alerted, through a notification or some more mechanical way, you might need to spend a few more dollars at hardware.
 
 As I in a [previous project](https://www.particle.io/blog/how-to-unlock-a-door-with-your-face-using-particle/) had used the M2 SoM Evaluation Board and a B524 SoM, I decided to use the same setup, but there's nothing hindering you using e.g. Photon 2 instead. In this project physical bells are jingled with the help of the servo motor when Santa is detected.
 
@@ -29,7 +31,7 @@ From a user perspective, the process is straightforward:
 - If a face is detected:
   - It checks whether the face matches one of the eight identities it has been calibrated to recognize.
   - If a matching face (= Santa) is found, the Particle device signals the servo accordingly.
-  - A mobile notification is sent through Pushover, alerting that Santa is around!
+  - A mobile notification is sent via Pushover to let you know Santa's in town!
 
 Below a GIF-video demonstrating the behavior, here's a short [video clip](https://youtube.com/shorts/aByAacTvO_A) with sound. The Person Sensor indicates with its green LED (barely visible in the Youtube video) that there are faces visible in its view, but the program acts only when it recognizes Santa. The Person Sensor is almost touching the window to reduce glaring from the window glass.
 
@@ -73,7 +75,7 @@ For this project, you’ll need
 
 - A Particle account and basic understanding of the Particle platform's capabilities.
 - Particle-flavored, Arduino-style, C++ development.
-- No soldering is required for this PoC
+- No soldering required
 - Optional but strongly recommended:
   - [3D-printed case](/images/Linear_actuator_holder.stl) for the linear actuator, this can be fastened on any standard camera tripod or the [gooseneck](https://www.amazon.de/-/en/SUNNINGUP-Webcam-Holder-Gooseneck-Logitech/dp/B0CY1XCK5Y?crid=2WFW7HQM0HJPJ&dib=eyJ2IjoiMSJ9.kT3ZM6nWF0QKwosUQT_7Zq7jwWNwwZ8WvtMwOnsT8BZB1YZatMffhUGVJ9v7VmbB6F0LRjLQwBTMhXCrjN0eL_oO6GXo6AwQT3qCoP9wAKfZoJhlRgNDi21J_63oxpuw1q6M_synfozWbhuBRjnp_lzQP1CZA_pqM8mBNxlh91G__mYFKp-3W7TjKo_ue9WQ-rurY08xTsVJNB-5aWHc9owTR8U0kZnV634K6-KGCno.96RiRaGgM76K_7PEJZX35qy5HXdGSG0hmovSdrlnwe4&dib_tag=se&keywords=gooseneck+tripod&qid=1725531849&sprefix=gooseneck+tripod%2Caps%2C92&sr=8-10) I used
 
@@ -199,10 +201,10 @@ All this means that apart from a few configurations options, the sensor can't be
 
 #### Calibration
 
-The calibration can in theory be done stand-alone, but for practical purposes a computer should be connected. This way you can verify the functionality via the terminal window: 
+While calibration can technically be done stand-alone, it’s much more practical to connect a computer. This way you can verify the functionality via the terminal window: 
 - Position the person whose face you want to store in front of the sensor. When the face is detected, the green LED will light up.
 - Within ~200 ms, press the `Mode` button on the Eval Board to store the face's features and assign it an ID in the sensor's EEPROM. Up to eight faces can be stored, with IDs ranging from 0 to 7.
-- Repeat this process for each new face you want to store.
+- Repeat this for each face you'd like to store.
 
 Below the function which is reacting on the button event. The "magic" happens in this code line - `person_sensor_write_reg(NEXT_ID_REGISTER, nextFaceID);` - which stores the face's features and corresponding ID into EEPROM.
 
@@ -278,7 +280,7 @@ void santa()  {
 ![](/images/All_persons.png)
 
 
-The Santa Detector worked better than I'd believed, especially considering there are three layer of glass in the windows.
+The Santa Detector worked even better than I expected—especially given the three layers of glass in the windows.
 
 As you've seen from the video and still pictures, the Person Sensor can distinguish between different faces and react accordingly. A further improvement to the program would be to utilize the confidence score reported by the sensor, e.g. only taking actions if the confidence is > 80 %. Other practical improvements is to use longer wires to the sensor and the servo so they can easier be placed further away from the Particle board.
 
