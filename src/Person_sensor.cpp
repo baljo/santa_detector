@@ -1,6 +1,6 @@
-// This program detects faces with a Person Sensor, publishes signal and battery data,
+// This program detects Santa with a Person Sensor, moves a servo to jingle bells
 // and blinks the user LED when a face is found. 
-// Created on: 2024-10-08 14:00:00, by Thomas Vikström
+// Created on: 2024-11-24 14:00:00, by Thomas Vikström
 
 #include <Wire.h>
 #include "person_sensor.h"

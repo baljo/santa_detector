@@ -31,7 +31,7 @@ From a user perspective, the process is straightforward:
   - If a matching face (= Santa) is found, the Particle device signals the servo accordingly.
   - A mobile notification is sent through Pushover, alerting that Santa is around!
 
-Below a GIF-video demonstrating the behavior, here's a short [video clip](https://youtube.com/shorts/aByAacTvO_A) with sound.
+Below a GIF-video demonstrating the behavior, here's a short [video clip](https://youtube.com/shorts/aByAacTvO_A) with sound. The Person Sensor indicates with its green LED (barely visible in the Youtube video) that there are faces visible in its view, but the program acts only when it recognizes Santa. The Person Sensor is almost touching the window to reduce glaring from the window glass.
 
 ![](/images/Santa_Detector.gif)
 
@@ -272,21 +272,15 @@ void santa()  {
 ```
 
 
-### Notification settings ###
-
-With the Pushover service you can send 10000 notifications/month for free. Especially while setting up and testing this concept, I could easily consume close to 100 notifications per day. From a quota point of view this was still not an issue, but I got tired of the constant pings on my mobile and smartwatch. Hence I decided to send a notification if at least 10 seconds have gone since previous notification.
-
-
-## Security notes ##
-
-According to Useful Sensors you shouldn’t rely on the facial identification results as a **sole** security factor, since it’s not designed to be that accurate. It’s intended for less safety-critical applications like personalizing a user experience automatically, where the cost of mistakes is lower.
-
-You of course also needs to consider physical security of the device, and weather-proofing everything as per the location.
-
-
 
 # CONCLUSION #
 
+![](/images/All_persons.png)
 
 
-This PoC and tutorial demonstrated how you with fairly simple devices can build a facial recognition and identification doorbell/notification device, and in addition how you can utilize it for e.g. unlocking purposes. This was also the first time I used a Particle device together with their IoT-platform, and although I didn't understand everything right away, I'm surprised how logical everything is, once I got over the initial hurdle!
+The Santa Detector worked better than I'd believed, especially considering there are three layer of glass in the windows.
+
+As you've seen from the video and still pictures, the Person Sensor can distinguish between different faces and react accordingly. A further improvement to the program would be to utilize the confidence score reported by the sensor, e.g. only taking actions if the confidence is > 80 %. Other practical improvements is to use longer wires to the sensor and the servo so they can easier be placed further away from the Particle board.
+
+
+Feel free to clone [my Github repo](https://github.com/baljo/santa_detector) to build your own Santa Detector!
