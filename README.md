@@ -9,7 +9,7 @@ This is again the time of the year when it pays off for children between the age
 
 Living just a few sledge rides from the Polar Circle and the mountain of Korvatunturi where the real Santa Claus lives, we are in Finland used to having his elves or sometimes even Santa himself, checking our behavior through the windows. Typically we never see them in action, but instead only notice tracks in the snow or some fur hair from reindeers the morning after the visit. If we however use some clever technology, we will get alerted when Santa's crew is around!
 
-![](/images/Overview_compr.jpg)
+![](/images/Overview_2_compr.jpg)
 
 ## Solution
 
