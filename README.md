@@ -11,7 +11,7 @@ Living just a few sleigh rides away from the Arctic Circle and the legendary Kor
 
 But what if we could outsmart them with some clever tech? Well, now we can get alerts when Santa’s crew is sneaking around!
 
-![](/images/Overview_2_compr.jpg)
+![](/images/Overview_3_compr.jpg)
 
 ## Solution
 
